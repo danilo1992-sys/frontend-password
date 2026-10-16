@@ -1,6 +1,8 @@
 import { DarkThemeToggle } from "flowbite-react";
 import { View } from "./components/View.tsx";
 import { Check } from "./components/Check.tsx";
+import { ErrorBoundary } from "./components/ErrorBoundary.tsx";
+import Footers from "./components/Footer.tsx";
 
 export default function App() {
   return (
@@ -8,9 +10,14 @@ export default function App() {
       <div className="absolute top-4 right-4">
         <DarkThemeToggle />
       </div>
-      <View />
-      <div className="pt-6">
-        <Check />
+      <ErrorBoundary>
+        <View />
+        <div className="pt-6">
+          <Check />
+        </div>
+      </ErrorBoundary>
+      <div className="mt-12">
+        <Footers />
       </div>
     </main>
   );

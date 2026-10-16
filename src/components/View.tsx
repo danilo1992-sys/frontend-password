@@ -1,6 +1,5 @@
 import { Button, Card, Spinner } from "flowbite-react";
 import { useState, type ChangeEvent, type FormEvent } from "react";
-import Arrow from "./icons/Arrow";
 import { usePassword } from "../store";
 
 const MIN_LENGTH = 8;
@@ -45,7 +44,6 @@ export function View() {
         <Button type="submit" disabled={loading} fullSized>
           {loading ? <Spinner size="sm" aria-label="Generando" /> : null}
           {loading ? "Generando..." : "Generar password"}
-          {loading ? null : <Arrow />}
         </Button>
       </form>
 
