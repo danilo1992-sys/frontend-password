@@ -11,6 +11,16 @@ type PasswordState = {
   fetchPassword: (length?: number) => Promise<void>;
 };
 
+interface AppState {
+  pageState: "upload" | "loading" | "view";
+  setPageState: (state: "upload" | "loading" | "view") => void;
+}
+
+export const checkPassword = create<AppState>((set) => ({
+  pageState: "upload",
+  setPageState: (state) => set({ pageState: state }),
+}));
+
 export const usePassword = create<PasswordState>()((set) => ({
   password: "",
   loading: false,
