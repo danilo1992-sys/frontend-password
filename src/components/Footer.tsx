@@ -7,9 +7,20 @@ export default function Footers() {
       <div className="w-full sm:flex sm:items-center sm:justify-between">
         <FooterCopyright by="Danilo Caceres" year={2026} />
         <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
-          <FooterIcon href="#" icon={BsGithub} />
-          <FooterIcon href="#" icon={BsMailbox} />
-          <FooterIcon href="#" icon={BsDribbble} />
+          <FooterIcon
+            href="https://github.com/danilo1992-sys"
+            icon={BsGithub}
+            target="_blank"
+          />
+          <FooterIcon
+            href="mailto:danilogabrielcaceres@gmail.com"
+            icon={BsMailbox}
+          />
+          <FooterIcon
+            target="_blank"
+            href="https://portfolio-astro-ven9.onrender.com"
+            icon={BsDribbble}
+          />
         </div>
       </div>
     </Footer>

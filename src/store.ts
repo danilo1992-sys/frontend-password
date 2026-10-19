@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const API_URL = "http://localhost:8000/router/";
+const API_URL = import.meta.env.VITE_API_URL;
 const MIN_LENGTH = 8;
 const MAX_LENGTH = 256;
 

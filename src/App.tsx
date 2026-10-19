@@ -16,7 +16,7 @@ export default function App() {
           <Check />
         </div>
       </ErrorBoundary>
-      <div className="mt-12">
+      <div className="w-full pt-12">
         <Footers />
       </div>
     </main>
