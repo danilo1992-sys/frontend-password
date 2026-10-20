@@ -17,7 +17,7 @@ export class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.error) {
       return (
-        <div className="max-w-sm rounded-lg border border-red-300 bg-red-50 p-4 text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-300 py-12">
+        <div className="max-w-sm rounded-lg border border-red-300 bg-red-50 p-4 py-12 text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-300">
           <p className="font-medium">Algo falló al mostrar los resultados</p>
           <p className="mt-1 text-sm break-words">{this.state.error.message}</p>
           <button
