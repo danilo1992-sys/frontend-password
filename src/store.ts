@@ -1,6 +1,6 @@
 import { create } from "zustand";
+import { API_BASE, apiUrl } from "./api";
 
-const API_URL = import.meta.env.VITE_API_URL;
 const MIN_LENGTH = 8;
 const MAX_LENGTH = 256;
 
@@ -24,9 +24,17 @@ export const usePassword = create<PasswordState>()((set) => ({
     set({ loading: true, error: null });
 
     try {
-      const response = await fetch(`${API_URL}generate?length=${safeLength}`);
+      if (!API_BASE) {
+        throw new Error(
+          "Falta VITE_API_URL: copiá .env.example a .env con la base del backend",
+        );
+      }
+
+      const response = await fetch(
+        `${apiUrl("generate")}?length=${safeLength}`,
+      );
       if (!response.ok) {
-        throw new Error("password no generada");
+        throw new Error(`La API respondió con status ${response.status}`);
       }
 
       const data: unknown = await response.json();

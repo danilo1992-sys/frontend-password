@@ -1,9 +1,9 @@
 import { useState, type FormEvent } from "react";
 import { Button, Card, Label, TextInput } from "flowbite-react";
+import { apiUrl } from "../api";
 import { Tables, type CheckResult } from "./Table";
 
-const API_URL = import.meta.env.VITE_API_URL;
-const URL = `${API_URL}/router/check`;
+const URL = apiUrl("check");
 
 // Verificamos la forma de la respuesta antes de guardarla en el estado,
 // así un JSON inesperado nunca rompe el render.
