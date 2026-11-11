@@ -1,19 +1,18 @@
-/**
- * Único punto donde se arma la base de la API.
- *
- * `VITE_API_URL` es la base del backend **incluyendo el prefijo del router**
- * (ver `render.yml` y `.env.example`), por ejemplo:
- *
- *     VITE_API_URL="https://api-pasword.onrender.com/router"
- *
- * Por eso `apiUrl("generate")` produce `.../router/generate` y NO
- * `.../routergenerate` ni `.../router/router/generate`.
- */
 const API_BASE = (import.meta.env.VITE_API_URL ?? "").replace(/\/+$/, "");
 
 export { API_BASE };
 
-/** Concatena la base con un path, normalizando las barras. */
-export function apiUrl(path: string): string {
-  return `${API_BASE}/${path.replace(/^\/+/, "")}`;
+/**
+ * Concatena la base con un path.
+ *
+ * `router: false` sirve para endpoints que NO viven bajo el prefijo del router
+ * (p. ej. `/phishing/check`, que se monta en la raíz de la API): en ese caso
+ * se omite el `/router` final de la base si lo tiene.
+ */
+export function apiUrl(
+  path: string,
+  { router = true }: { router?: boolean } = {},
+): string {
+  const base = router ? API_BASE : API_BASE.replace(/\/router\/?$/, "");
+  return `${base}/${path.replace(/^\/+/, "")}`;
 }
