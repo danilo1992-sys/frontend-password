@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { TabItem, Tabs as TabsFlowbite } from "flowbite-react";
 import { Check } from "./Check";
 import { View } from "./View";
-import Phishing from "./Phishing";
+import { Phishing } from "./Phishing";
 
 const pestañas = ["Generar", "Check", "Phishing"] as const;
 

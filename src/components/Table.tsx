@@ -19,6 +19,21 @@ export type CheckResult = {
   };
 };
 
+export type DetallePhishing = {
+  posicion: number;
+  caracter: string;
+  nombre: string;
+  categoria: string;
+  riesgo: string;
+};
+
+export type PhishingResult = {
+  nivel: string;
+  sospechosos: number;
+  total: number;
+  detalles: DetallePhishing[];
+};
+
 const FILAS: Array<{ etiqueta: string; valor: keyof CheckResult["detalles"] }> =
   [
     { etiqueta: "Longitud mínima", valor: "longitud_minima" },
@@ -61,6 +76,72 @@ export function Tables({ resultado }: { resultado: CheckResult }) {
           ))}
         </TableBody>
       </Table>
+    </div>
+  );
+}
+
+export function PhishingTable({ resultado }: { resultado: PhishingResult }) {
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeadCell>Detalles</TableHeadCell>
+              <TableHeadCell>Valor</TableHeadCell>
+            </TableRow>
+          </TableHead>
+          <TableBody className="divide-y">
+            <TableRow>
+              <TableCell className="font-medium whitespace-nowrap text-gray-900 dark:text-white">
+                Nivel
+              </TableCell>
+              <TableCell>{resultado.nivel}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium whitespace-nowrap text-gray-900 dark:text-white">
+                Caracteres analizados
+              </TableCell>
+              <TableCell>{resultado.total}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium whitespace-nowrap text-gray-900 dark:text-white">
+                Sospechosos
+              </TableCell>
+              <TableCell>{resultado.sospechosos}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+
+      {resultado.detalles.length > 0 ? (
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableHeadCell>Posición</TableHeadCell>
+                <TableHeadCell>Carácter</TableHeadCell>
+                <TableHeadCell>Nombre</TableHeadCell>
+                <TableHeadCell>Categoría</TableHeadCell>
+                <TableHeadCell>Riesgo</TableHeadCell>
+              </TableRow>
+            </TableHead>
+            <TableBody className="divide-y">
+              {resultado.detalles.map((detalle) => (
+                <TableRow key={`${detalle.posicion}-${detalle.caracter}`}>
+                  <TableCell>{detalle.posicion}</TableCell>
+                  <TableCell className="font-mono">
+                    {detalle.caracter}
+                  </TableCell>
+                  <TableCell>{detalle.nombre}</TableCell>
+                  <TableCell>{detalle.categoria}</TableCell>
+                  <TableCell>{detalle.riesgo}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      ) : null}
     </div>
   );
 }
